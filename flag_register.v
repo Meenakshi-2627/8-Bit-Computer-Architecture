@@ -16,7 +16,9 @@ always @(posedge clk) begin
     carry_f <= 1'b0;
   end
   else if (flag_en) begin
-    zero_f  <= 1'b0;
+      if(rf==8'b0)begin
+        zero_f  <= 1'b0;
+      end
     carry_f <= carry;
   end
 end
