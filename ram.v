@@ -2,11 +2,12 @@
 module ram(
    input clk,rst,ram_out,ram_in,
    input SET,
-   inout [7:0]b,
+   input [7:0]b_in,
    input [3:0]addr,
    input [3:0]addr_mar,
-   input [7:0]din
-);
+   input [7:0]din,
+   output [7:0]b_out
+   );
 reg [7:0]mem[15:0];
 
 integer i;
@@ -24,9 +25,9 @@ always@(posedge clk)
         end     
       else if(ram_in)
          begin
-          mem[addr_mar] <= b ;
+          mem[addr_mar] <= b_in ;
          end     
      end  
              
-  assign b = (ram_out) ? mem[addr_mar] : 8'bz;             
+  assign b_out = (ram_out) ? mem[addr_mar] : 8'bz;             
 endmodule
