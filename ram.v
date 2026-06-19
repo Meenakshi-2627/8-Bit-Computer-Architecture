@@ -28,5 +28,5 @@ always@(posedge clk)
          end     
      end  
              
-  assign b = (ram_out) ? mem[addr_mar] : 8'hzz;             
+  assign b = (ram_out) ? mem[addr_mar] : 8'bz;             
 endmodule
