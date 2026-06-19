@@ -21,7 +21,7 @@ module output_display(
     wire [1:0] scan_sel = refresh_counter[17:16];
     reg [3:0] current_digit;
 
-    always @* begin
+    always @(*) begin
         an = 8'b11111111; 
         seg[7] = 1'b1;     
         current_digit = 4'd0;
