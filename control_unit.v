@@ -1,10 +1,10 @@
 
 `timescale 1ns / 1ps
 module control_unit(
-    input clk,rst,
+    input clk,rst,zero_f,carry_f,
     input SET,
     input [3:0]opcode,
-    output reg pc_o,pc_l,pc_e,mar_in,ram_in,ram_out,out_in,flag_en,areg_in,breg_in,areg_out,ir_in,ir_out,zero_f,carry_f,alu_out,input_out,hlt_out,
+    output reg pc_o,pc_l,pc_e,mar_in,ram_in,ram_out,out_in,flag_en,areg_in,breg_in,areg_out,ir_in,ir_out,alu_out,input_out,hlt_out,
     output reg [2:0]alu_op
     );
     parameter T0=3'b000,T1=3'b001,T3=3'b011,T4=3'b100,T5=3'b101,HLT=3'b010;
@@ -31,7 +31,7 @@ module control_unit(
             {pc_o,pc_l,pc_e,mar_in,ram_in,ram_out,out_in,flag_en,areg_in,breg_in,areg_out,ir_in,ir_out,alu_out,input_out}=0;
             case(state)
                 T0: begin
-                    if(!rst)begin
+                    if(!SET && !rst)begin
                         pc_o=1;
                         mar_in=1;
                         next_state=T1;
@@ -113,27 +113,34 @@ module control_unit(
                         endcase
                     end
                 T4: begin
-                if(opcode==4'b0010)begin
+                case(opcode)
+               4'b0010:begin
                     ram_out=1;
                     areg_in=1;
                     next_state=T0;
                     end
-                if(opcode==4'b0011)begin
+                4'b0011:begin
                     areg_out=1;
                     ram_in=1;
                     next_state=T0;
                     end
-                else begin
+                default: begin
                         ram_out=1;
                         breg_in=1;
                         next_state=T5;
                     end
+                   endcase
+                   
                     end
                 T5: begin
                         alu_out=1;
                         areg_in=1;
                         next_state=T0;
                     end
+                HLT: begin
+                        {pc_o,pc_l,pc_e,mar_in,ram_in,ram_out,out_in,flag_en,areg_in,breg_in,areg_out,ir_in,ir_out,alu_out,input_out,hlt_out,alu_op}=0;
+                        next_state=HLT;
+                        end
             endcase
         end
     
