@@ -2,7 +2,7 @@
 module top_mod_2(
 input clk,rst,power_on,
 input [3:0]addr_in,
-input [7:0]data_in,
+input [7:0]data_in,data,
 output [7:0] an,        
 output [7:0] seg 
 );
@@ -15,7 +15,7 @@ wire [7:0]bus_out,out_dis,mem_out;
 assign SET = power_on ? 0 : 1;
 
 ram R(.addr(addr_in),.din(data_in),.clk(clk),.rst(rst),.ram_out(ram_out),.ram_in(ram_in),.SET(SET),.mem_r(mem_r),.b(bus_out));
-top_mod_1 TP (.clk(clk),.rst(rst),.mem_out(mem_out),.SET(SET),.bus_out(bus_out),.out_disp(out_dis),.ram_in(ram_in),.ram_out(ram_out));
+top_mod_1 TP (.clk(clk),.rst(rst),.mem_out(mem_out),.SET(SET),.bus_out(bus_out),.out_disp(out_dis),.ram_in(ram_in),.ram_out(ram_out),.data(data));
 output_display OD (.clk(clk),.reset(rst),.binary_in(out_dis),.an(an),.seg(seg));
 
 endmodule
