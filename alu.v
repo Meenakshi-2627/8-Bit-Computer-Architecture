@@ -4,12 +4,12 @@ module alu(
     input clk , rst , alu_out,
     input [7:0] a_reg,
     input [7:0] b_reg,
-    input [2:0] alu_op,
-    output  reg [7:0]result,
+    input [2:0] alu_op, reg [7:0]result,
     output reg  carry_out,
     output reg zero_out,
     output [7:0]result_out
 );
+    reg [7:0]result;
 
 always@(posedge clk)
 begin
