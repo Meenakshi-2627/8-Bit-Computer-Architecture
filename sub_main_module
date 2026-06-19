@@ -1,0 +1,39 @@
+`timescale 1ns / 1ps
+
+module top_mod_1(
+  input clk,rst,
+  input SET,
+  output [3:0]mem_out,
+  inout [7:0]bus_out,
+  output ram_in,ram_out,
+  output [7:0]out_disp  
+ );
+
+    wire [7:0]bus,a_reg;
+    wire pc_l,pc_e,pc_o;
+    wire [3:0]pc_out;
+    wire [3:0]mem_ram;
+    wire ir_in,ir_out,mar_in;
+    wire [3:0]opcode;
+    wire [2:0]alu_op;
+    wire out_in,flag_en,areg_in,breg_in,areg_out,zero_f,carry_f,alu_out,input_out,hlt_out;
+    wire [7:0]b_reg;
+    wire [7:0]result;
+    wire carry_out,zero_out;
+    wire [7:0]data,data_out;
+    wire [7:0]out_dis;
+    
+    assign bus_out=bus;
+        
+    prgm_counter PC(.b(bus[3:0]),.pc_l(pc_l),.pc_o(pc_o),.pc_e(pc_e),.pc_out(pc_out),.clk(clk),.rst(rst));
+    mem_addr_reg MAR(.b(bus[3:0]),.mem_out(mem_ram),.clk(clk),.rst(rst),.mar_in(mar_in));
+    instruction_register IR(.b(bus),.opcode(opcode),.ir_in(ir_in),.ir_out(ir_out),.clk(clk),.rst(rst));
+    control_unit CU (.clk(clk),.rst(rst),.alu_op(alu_op),.mar_in(mar_in),.ram_in(ram_in),.ram_out(ram_out),.pc_o(pc_o),.pc_l(pc_l),.pc_e(pc_e),.out_in(out_in),.flag_en(flag_en),.areg_in(areg_in),.breg_in(breg_in),.areg_out(areg_out),.zero_f(zero_f),.carry_f(carry_f),.alu_out(alu_out),.input_out(input_out),.hlt_out(hlt_out),.SET(SET),.ir_in(ir_in),.ir_out(ir_out),.opcode(opcode));
+    a_reg AREG (.clk(clk),.rst(rst),.b(bus),.areg_in(areg_in),.areg_out(areg_out),.a_reg(a_reg));
+    b_reg BREG (.clk(clk),.rst(rst),.b(bus),.b_reg(b_reg),.breg_in(breg_in));
+    alu ALU (.rst(rst),.result_out(bus),.a_reg(a_reg),.b_reg(b_reg),.alu_out(alu_out),.alu_op(alu_op),.carry_out(carry_out),.zero_out(zero_out));
+    flag_reg FR(.clk(clk),.rst(rst),.flag_en(flag_en),.carry_out(carry_out),.zero_out(zero_out),.zero_f(zero_f),.carry_f(carry_f));
+    input_register INPREG(.clk(clk),.rst(rst),.input_out(input_out),.data(data),.data_out(data_out));
+    output_register OREG(.clk(clk),.rst(rst),.out_dis(out_dis),.b(bus),.out_in(out_in));
+   
+endmodule
