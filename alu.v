@@ -1,5 +1,4 @@
 `timescale 1ns / 1ps
-
 module alu(
     input  rst , alu_out,
     input [7:0] a_reg,
