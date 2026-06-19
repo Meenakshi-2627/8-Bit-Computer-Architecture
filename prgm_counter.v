@@ -2,10 +2,9 @@
 module prgm_counter(
      input clk,rst,
      input pc_l,pc_e,pc_o,  
-     output reg [3:0]pc_out,
-     inout [3:0]b 
+     inout [7:0]b 
  );
-   
+  reg [3:0]pc_out; 
  always@(posedge clk)
      begin
        if(rst)
@@ -15,5 +14,5 @@ module prgm_counter(
        else if(pc_l)
           pc_out <= b;
      end  
-   assign b = (pc_o) ? pc_out : 4'bzzzz;                     
+   assign b = (pc_o) ?{4'b0, pc_out} : 8'bzzzz;                     
 endmodule
