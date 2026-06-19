@@ -7,7 +7,7 @@ module instruction_register(
     );
     reg [7:0]instruction_register;
     
-    assign b[3:0] = ir_out ? instruction_register[3:0]:4'bz;
+    assign b[7:0] = ir_out ? {4'b0,instruction_register[3:0]}:8'bz;
     always@(posedge clk)begin
         if(rst)
             instruction_register<=0;
