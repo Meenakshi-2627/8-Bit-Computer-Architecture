@@ -2,6 +2,7 @@
 `timescale 1ns / 1ps
 module control_unit(
     input clk,rst,
+    input SET,
     input [3:0]opcode,
     output reg pc_o,pc_l,pc_e,mar_in,ram_in,ram_out,out_in,flag_en,areg_in,breg_in,areg_out,ir_in,ir_out,zero_f,carry_f,alu_out,input_out,hlt_out,
     output reg [2:0]alu_op
@@ -12,10 +13,17 @@ module control_unit(
     always@(posedge clk)begin
         if (rst)begin
             state<=T0;
-            {pc_o,pc_l,pc_e,mar_in,ram_in,ram_out,out_in,flag_en,areg_in,breg_in,areg_out,ir_in,ir_out,zero_f,carry_f,alu_out,input_out,alu_op[2:0]}<=0;
+            {pc_o,pc_l,pc_e,mar_in,ram_in,ram_out,out_in,flag_en,areg_in,breg_in,areg_out,ir_in,ir_out,zero_f,carry_f,alu_out,input_out,alu_op[2:0],hlt_out}<=0;
             end
+            
+        if(SET) 
+          
+{pc_o,pc_l,pc_e,mar_in,ram_in,ram_out,out_in,flag_en,areg_in,breg_in,areg_out,ir_in,ir_out,zero_f,carry_f,alu_out,input_out,alu_op[2:0],hlt_out}<=0;
+   
         else
+           begin
            state <= next_state;
+           end
            end
           
            always@(*)
