@@ -2,19 +2,19 @@
 
 module a_reg(
     input areg_in,areg_out,rst,clk,
-    inout [7:0]b,
-    output reg[7:0]a_reg
+    input [7:0]b_in,
+    output [7:0]b_out
     );
-  
+  reg[7:0]a_reg;
     always@(posedge clk)begin
     if(rst)
         a_reg<=0;
     else begin
         if(areg_in)begin
-        a_reg<=b;
+        a_reg<=b_in;
         end
     end
     end
-    assign b= areg_out ? a_reg : 8'bz;
+    assign b_out= areg_out ? a_reg : 8'bz;
 
 endmodule
