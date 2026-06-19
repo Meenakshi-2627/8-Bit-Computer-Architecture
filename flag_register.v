@@ -15,7 +15,7 @@ always @(posedge clk)
     zero_f  <= 1'b0;
     carry_f <= 1'b0;
   end
-  else if (flag_en) 
+  else if (flag_en && (zero_out !== 1'bx) && (carry_out !== 1'bx))
       begin
         zero_f  <=zero_out;
        carry_f <= carry_out;
