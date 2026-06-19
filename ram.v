@@ -5,8 +5,7 @@ module ram(
    inout [7:0]b,
    input [3:0]addr,
    input [3:0]addr_mar,
-   input [7:0]din,
-   output reg [7:0]mem_r
+   input [7:0]din
 );
 reg [7:0]mem[15:0];
 
@@ -19,7 +18,7 @@ always@(posedge clk)
           for(i=0;i<16;i=i+1)
             mem[i] <= 0;
         end
-      if(SET)
+      else if(SET)
         begin
         mem[addr] <= din;
         end     
@@ -28,8 +27,6 @@ always@(posedge clk)
           mem[addr_mar] <= b ;
          end     
      end  
-always@(*)
-    mem_r = mem[addr_mar];
              
-  assign b = (ram_out) ? mem_r : 8'hzz;             
+  assign b = (ram_out) ? mem[addr_mar] : 8'hzz;             
 endmodule
