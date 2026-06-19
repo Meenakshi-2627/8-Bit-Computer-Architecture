@@ -3,9 +3,8 @@
 module b_reg(
     input breg_in,rst,clk,
     inout [7:0]b,
-    output [7:0]bwire
+    output  reg [7:0] b_reg;
     );
-    reg [7:0] b_reg;
     always@(posedge clk)begin
     if(rst)
         b_reg<=0;
@@ -15,5 +14,4 @@ module b_reg(
         end
     end
     end
-    assign bwire = b_reg;
 endmodule
