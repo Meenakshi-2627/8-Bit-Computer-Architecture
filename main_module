@@ -8,8 +8,9 @@ module top_mod_2(
 );
 wire SET;
 wire ram_out,ram_in;
-wire [7:0]bus_out,out_dis;
+wire [7:0]out_dis;
 wire [3:0]mem_out;
+wire [7:0]bus_out;
 
 
 assign SET = power_on ? 0 : 1;
