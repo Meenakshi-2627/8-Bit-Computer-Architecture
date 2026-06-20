@@ -17,7 +17,7 @@
 ---
 
 <p align="center">
-<img src="IMAGES/8BIT.gif" width="1000" height="400"/>
+<img src="IMAGES/8BIT.gif" width="300" height="400"/>
 </p>
 
 [![FPGA](https://img.shields.io/badge/FPGA-Boolean_Board-blue.svg)](#)
@@ -43,7 +43,7 @@
 The goal of this project is to bridge the gap between abstract computer organization concepts and physical FPGA implementation. By writing custom Verilog for every register, memory module, and control unit, this processor is capable of executing a customized 16-instruction ISA.   
 
 ---
-For simulation : [Click here](#-http://127.0.0.1:5501/index.html)
+For simulation : [Click here](http://127.0.0.1:5501/index.html)
 
 ---
 ### Key Objectives:
@@ -67,7 +67,7 @@ For simulation : [Click here](#-http://127.0.0.1:5501/index.html)
 
 The processor relies on an 8-bit central data bus topology. Data flow is entirely governed by the `control_unit`, which systematically enables tri-state buffers to move data between specific registers during discrete timing phases (T-Cycles).
 
-![8-Bit Architecture Block Diagram](./images/8BIT-ARCHITECTURE.png)
+![8-Bit Architecture Block Diagram](./IMAGES/8BIT-ARCHITECTURE.png)
 *(Fig 1. Visual representation of the central data bus, hardware modules, and active control signal routing).*
 
 ---
@@ -168,5 +168,5 @@ To run this project:
 ---
 ## Contributors
 
-Thaaroone S A : [Linkedin](https://www.linkedin.com/in/thaaroone-sarvajit-9b9b09329/) , [Github](#-)        
-Janadini S K : [Linkedin](#-https://www.linkedin.com/in/janadini-s-k-508910338/) , [Github](#-)
+Thaaroone S A : [Linkedin](https://www.linkedin.com/in/thaaroone-sarvajit-9b9b09329/) , [Github](https://github.com/Thaaroone)        
+Janadini S K : [Linkedin](https://www.linkedin.com/in/janadini-s-k-508910338/) , [Github](https://github.com/JANADINI)
