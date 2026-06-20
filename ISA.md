@@ -17,7 +17,7 @@
 ---
 
 <p align="center">
-<img src="IMAGES/8BIT.gif" width="300" height="400"/>
+<img src="IMAGES/8BIT.gif" width="500" height="400"/>
 </p>
 
 [![FPGA](https://img.shields.io/badge/FPGA-Boolean_Board-blue.svg)](#)
