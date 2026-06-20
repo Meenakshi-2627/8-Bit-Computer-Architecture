@@ -2,7 +2,7 @@
 <tr>
 <td width="120">
 
-<img src="Images/8-bit-icon.png" width="100"/>
+<img src="IMAGES/8-bit-icon.png" width="100"/>
 
 </td>
 
@@ -17,7 +17,7 @@
 ---
 
 <p align="center">
-<img src="Images/8BIT.gif" width="1000" height="400"/>
+<img src="IMAGES/8BIT.gif" width="1000" height="400"/>
 </p>
 
 [![FPGA](https://img.shields.io/badge/FPGA-Boolean_Board-blue.svg)](#)
@@ -168,5 +168,5 @@ To run this project:
 ---
 ## Contributors
 
-Thaaroone S A : [Linkedin](#-https://www.linkedin.com/in/thaaroone-sarvajit-9b9b09329/) , [Github](#-)        
+Thaaroone S A : [Linkedin](https://www.linkedin.com/in/thaaroone-sarvajit-9b9b09329/) , [Github](#-)        
 Janadini S K : [Linkedin](#-https://www.linkedin.com/in/janadini-s-k-508910338/) , [Github](#-)
