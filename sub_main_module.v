@@ -26,6 +26,7 @@ module top_mod_1(
     
     assign bus_out= b_out;
     assign bus = bus_in;
+    
     prgm_counter PC(.b(bus),.pc_l(pc_l),.pc_o(pc_o),.pc_e(pc_e),.clk(clk),.rst(rst));
     mem_addr_reg MAR(.b(bus[3:0]),.mem_out(mem_out),.clk(clk),.rst(rst),.mar_in(mar_in));
     instruction_register IR(.b(bus),.opcode(opcode),.ir_in(ir_in),.ir_out(ir_out),.clk(clk),.rst(rst));
