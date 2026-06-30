@@ -15,9 +15,9 @@ wire [7:0]bus_out,bus_in;
 
 assign SET = power_on ? 0 : 1;
 
-ram R(.addr(addr_in),.din(data_in),.clk(clk_out),.rst(rst),.ram_out(ram_out),.ram_in(ram_in),.SET(SET),.addr_mar(mem_out),.b_out(bus_in),.b_in(bus_out));
-top_mod_1 TP (.clk(clk_out),.rst(rst),.mem_out(mem_out),.SET(SET),.bus_out(bus_out),.out_disp(out_dis),.ram_in(ram_in),.ram_out(ram_out),.data(data_in),.bus_in(bus_in));
-output_display OD (.clk(clk_out),.reset(rst),.binary_in(out_dis),.an(an),.seg(seg));
-clk_div  CLK(.clk_in(clk),.rst(rst),.clk_out(clk_out));
+ram R(.addr(addr_in),.din(data_in),.clk(clk),.rst(rst),.ram_out(ram_out),.ram_in(ram_in),.SET(SET),.addr_mar(mem_out),.b_out(bus_in),.b_in(bus_out));
+top_mod_1 TP (.clk(clk),.rst(rst),.mem_out(mem_out),.SET(SET),.bus_out(bus_out),.out_disp(out_dis),.ram_in(ram_in),.ram_out(ram_out),.data(data_in),.bus_in(bus_in));
+output_display OD (.clk(clk),.rst(rst),.binary_in(out_dis),.an(an),.seg(seg));
+//clk_div  CLK(.clk_in(clk),.rst(rst),.clk_out(clk_out));
 
 endmodule
