@@ -1,4 +1,3 @@
-
 `timescale 1ns / 1ps
 module control_unit(
     input clk,rst,zero_f,carry_f,
@@ -7,7 +6,7 @@ module control_unit(
     output reg pc_o,pc_l,pc_e,mar_in,ram_in,ram_out,out_in,flag_en,areg_in,breg_in,areg_out,ir_in,ir_out,alu_out,input_out,hlt_out,
     output reg [2:0]alu_op
     );
-    parameter T0=3'b000,T1=3'b001,T3=3'b011,T4=3'b100,T5=3'b101,HLT=3'b010;
+    parameter T0=3'b000,T1=3'b001,T3=3'b011,T4=3'b100,T5=3'b101,HLT=3'b101,T2=3'b010;
     reg [2:0]state,next_state;
     
     always@(posedge clk)begin
@@ -40,10 +39,12 @@ module control_unit(
                 T1: begin
                         ram_out=1;
                         ir_in=1;
-                        pc_e=1;
-                        next_state=T3;
+                        next_state=T2;
                     end
-               
+               T2: begin
+                    pc_e=1;
+                    next_state=T3;
+                    end
                 T3: begin
                         casex(opcode)
                             4'b0000: begin
