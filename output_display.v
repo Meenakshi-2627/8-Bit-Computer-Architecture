@@ -4,10 +4,12 @@ module output_display(
     input clk,                  // Connect to your master board clock (e.g., 100MHz)
     input rst,                // Connect to your reset button
     input [7:0] binary_in,   // Your 8-bit output value from the computer (0-255)
-    output reg [7:0] an,     // Active-low anode vector
-    output reg [7:0] seg    // Active-low cathode/segment vector
+    output reg[7:0] an,     // Active-low anode vector
+    output reg[7:0] seg    // Active-low cathode/segment vector
 );
-
+/*assign an = 8'b1111_1110;
+assign seg = 8'b0111_1111;
+endmodule*/
     // 1. Refresh Counter (20-bit register handles clock division perfectly)
     reg [19:0] refresh_counter;
     always @(posedge clk or posedge rst) begin
@@ -37,11 +39,11 @@ module output_display(
 
         case(digit_select)
             // First 5 digits (0 to 4) are configured as blank spaces
-            3'b000: begin an = 8'b11111110; is_blank = 1'b1; end // Digit 0
-            3'b001: begin an = 8'b11111101; is_blank = 1'b1; end // Digit 1
-            3'b010: begin an = 8'b11111011; is_blank = 1'b1; end // Digit 2
-            3'b011: begin an = 8'b11110111; is_blank = 1'b1; end // Digit 3
-            3'b100: begin an = 8'b11101111; is_blank = 1'b1; end // Digit 4
+            3'b000: begin an = 8'b11111111; is_blank = 1'b1; end // Digit 0
+            3'b001: begin an = 8'b11111111; is_blank = 1'b1; end // Digit 1
+            3'b010: begin an = 8'b11111111; is_blank = 1'b1; end // Digit 2
+            3'b011: begin an = 8'b11111111; is_blank = 1'b1; end // Digit 3
+            3'b100: begin an = 8'b11111111; is_blank = 1'b1; end // Digit 4
             
             // Last 3 digits (5 to 7) display your computer's values
             3'b101: begin an = 8'b11011111; current_digit_val = hundreds; is_blank = 1'b0; end // Digit 5
@@ -50,22 +52,22 @@ module output_display(
         endcase
     end
 
-    // 4. 7-Segment Decoder (Assuming pin layout: [cg, cf, ce, cd, cc, cb, ca, dp])
+    // 4. 7-Segment Decoder (Assuming pin layout: [dp, cg, cf, ce, cd, cc, cb, ca])
     always @(*) begin
         if (is_blank) begin
             seg = 8'b11111111; // ALL ONES = Turns ALL segments OFF (Blank space!)
         end else begin
             case(current_digit_val)
-                4'd0: seg = 8'b10000001; // Display 0 (cg off, others on, dp off)
-                4'd1: seg = 8'b11111001; // Display 1
-                4'd2: seg = 8'b01001001; // Display 2
-                4'd3: seg = 8'b01100001; // Display 3
-                4'd4: seg = 8'b00110001; // Display 4
-                4'd5: seg = 8'b00100101; // Display 5
-                4'd6: seg = 8'b00000101; // Display 6
-                4'd7: seg = 8'b11111001; // Display 7
-                4'd8: seg = 8'b00000001; // Display 8
-                4'd9: seg = 8'b00100001; // Display 9
+                4'd0: seg = 8'b1100_0000; // Display 0 (cg off, others on, dp off)
+                4'd1: seg = 8'b1111_1001; // Display 1
+                4'd2: seg = 8'b1010_0100; // Display 2
+                4'd3: seg = 8'b1011_0000; // Display 3
+                4'd4: seg = 8'b1001_1001; // Display 4
+                4'd5: seg = 8'b1001_0010; // Display 5
+                4'd6: seg = 8'b1000_0010; // Display 6
+                4'd7: seg = 8'b1111_1000; // Display 7
+                4'd8: seg = 8'b1000_0000; // Display 8
+                4'd9: seg = 8'b1001_1001; // Display 9
                 default: seg = 8'b11111111; // Fallback to blank space
             endcase
         end
